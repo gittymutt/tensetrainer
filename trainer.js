@@ -69,13 +69,26 @@ Object.defineProperties(ENUM, {
   'have': {
     value: 702,
     writable: false
+  },
+  'I': {
+    value: 0,
+    writable: false
+  },
+  'sing': {
+    value: 1,
+    writable: false
+  },
+  'pl': {
+    value: 1,
+    writable: false
   }
+
 
 });
 
 
-var sentence = {Subj: "I",
-                number: 0,
+var sentence = {Subj: "She",
+                subjNum: ENUM.sing,
                 BFV: "go",
                 isIrreg: true,
                 isAction: true,
@@ -130,10 +143,27 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
                 keypad.innerText += "\n";
               });
 // choose forms by comparing the subject's number
-  var doForm = ENUM.do;
-  var bePresForm = ENUM.am;
-  var bePastForm = ENUM.was;
-  var haveForm = ENUM.have;
+  var doForm = ENUM.do;    // choose correct do form
+
+  switch (sentence.subjNum) {
+    case ENUM.I:
+      doForm = ENUM.do;
+      break;
+
+    case ENUM.sing:
+      doForm = ENUM.does;
+      break;
+    case ENUM.pl:
+      doForm = ENUM.do;
+  }
+
+  console.log(doForm);
+
+
+  var bePresForm = ENUM.am;   // choose correct present be form
+  var bePastForm = ENUM.was;   // choose correct past be form
+  var haveForm = ENUM.have;    // choose correct have form
+
 
 var simplePresNeg = [ENUM.subj, doForm, ENUM.not, ENUM.BFV];
 var simplePresQ = [doForm, ENUM.subj, ENUM.BFV];
@@ -173,6 +203,10 @@ var arr = answer.split(" ");
 if (simplePresNeg[counter] == arr) {
   console.log("treffer!");
   counter++;
+  console.log("Dispalying:");
+  console.log(buttons.find(function(element){return element.id == arr;})['name']);
+  document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
+  document.getElementById('result').innerText += "-";
     if (counter == simplePresNeg.length) {
       console.log("you win!!");
     }
