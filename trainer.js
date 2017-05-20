@@ -135,18 +135,8 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
   var bePastForm = 305;
   var haveForm = 702;
 
-var infos = "this is the infos";
-
-// runs when button is pressed
-var main = function (event){
-var answer = document.getElementById("answer").value;
-console.log("inofos:" + infos);
-
-//var toFind = 202;
-//console.log(buttons.find(function(element){return element.id == toFind;}));
-
-// create sentence info
-
+var simplePresNeg = [10, doForm, 666, 20];
+var simplePresQ = [doForm, 10, 20];
 
 
 
@@ -159,8 +149,22 @@ if (doForm === 202) {
 }
 
 
-var simplePresNeg = [10, doForm, 666, 20];
-var simplePresQ = [doForm, 10, 20];
+
+
+
+
+
+// runs when button is pressed
+var main = function (event){
+var answer = document.getElementById("answer").value;
+
+//var toFind = 202;
+//console.log(buttons.find(function(element){return element.id == toFind;}));
+
+// create sentence info
+
+
+
 
 
 
@@ -179,6 +183,3 @@ if (simplePresNeg[counter] == arr) {
 }
 
 console.log(document.getElementById('butt').addEventListener("click", main));
-
-ENUM.subj = "fuvk!!!";
-console.log(ENUM.subj);
