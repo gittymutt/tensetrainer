@@ -27,7 +27,7 @@ Object.defineProperties(ENUM, {
     writable: false
   },
   'does': {
-    value: 201,
+    value: 202,
     writable: false
   },
   'did': {
@@ -130,22 +130,22 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
                 keypad.innerText += "\n";
               });
 // choose forms by comparing the subject's number
-  var doForm = 201;
-  var bePresForm = 301;
-  var bePastForm = 305;
-  var haveForm = 702;
+  var doForm = ENUM.do;
+  var bePresForm = ENUM.am;
+  var bePastForm = ENUM.was;
+  var haveForm = ENUM.have;
 
-var simplePresNeg = [10, doForm, 666, 20];
-var simplePresQ = [doForm, 10, 20];
+var simplePresNeg = [ENUM.subj, doForm, ENUM.not, ENUM.BFV];
+var simplePresQ = [doForm, ENUM.subj, ENUM.BFV];
 
 
 
 var simplePresAffirm;
 
-if (doForm === 202) {
-    simplePresAffirm = [10, 20, 207];
+if (doForm === ENUM.does) {
+    simplePresAffirm = [ENUM.subj, ENUM.BFV, ENUM.s];
 } else {
-    simplePresAffirm = [10, 20 ];
+    simplePresAffirm = [ENUM.subj, ENUM.BFV ];
 }
 
 
