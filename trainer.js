@@ -1,5 +1,11 @@
 
 
+/*
+TO Do:
+make getsentence()
+
+
+*/
 var ENUM = {};
 Object.defineProperties(ENUM, {
   'subj': {
@@ -79,7 +85,7 @@ Object.defineProperties(ENUM, {
     writable: false
   },
   'pl': {
-    value: 1,
+    value: 2,
     writable: false
   }
 
@@ -87,14 +93,14 @@ Object.defineProperties(ENUM, {
 });
 
 
-var sentence = {Subj: "She",
-                subjNum: ENUM.sing,
-                BFV: "go",
+var sentence = {Subj: "Doogie and Froogie",
+                subjNum: ENUM.pl,
+                BFV: "eat",
                 isIrreg: true,
                 isAction: true,
-                SPast: "went",
-                ingForm: "going",
-                theRest: "to Macy's"
+                SPast: "ate",
+                ingForm: "eating",
+                theRest: "hasenpfeffer"
               };
 
 // Put words onto screen
@@ -142,27 +148,37 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
                 keypad.innerText += item['name'];
                 keypad.innerText += "\n";
               });
+
+
 // choose forms by comparing the subject's number
   var doForm = ENUM.do;    // choose correct do form
+  var bePresForm = ENUM.are;   // choose correct present be form
+  var bePastForm = ENUM.were;   // choose correct past be form
+  var haveForm = ENUM.have;    // choose correct have form
+
+
 
   switch (sentence.subjNum) {
     case ENUM.I:
-      doForm = ENUM.do;
+      bePresForm = ENUM.am;
       break;
 
     case ENUM.sing:
       doForm = ENUM.does;
+      bePresForm = ENUM.is;
+      bePastForm = ENUM.was;
+      haveForm = ENUM.has;
+      console.log("Is singular!!!!!" + sentence.subjNum);
       break;
+
     case ENUM.pl:
-      doForm = ENUM.do;
+      console.log("Is plural!");
   }
 
   console.log(doForm);
 
 
-  var bePresForm = ENUM.am;   // choose correct present be form
-  var bePastForm = ENUM.was;   // choose correct past be form
-  var haveForm = ENUM.have;    // choose correct have form
+
 
 
 var simplePresNeg = [ENUM.subj, doForm, ENUM.not, ENUM.BFV];
