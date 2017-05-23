@@ -3,7 +3,7 @@
 /*
 TO Do:
 make getsentence()
-
+change buttons objects to simple keys
 
 */
 var ENUM = {};
@@ -107,7 +107,10 @@ var sentence = {Subj: "Doogie and Froogie",
 document.getElementById("words").innerText = sentence['Subj'] + "/" + sentence['BFV'] + "/" +
                               sentence['theRest'];
 var counter = 0;
-// create keys
+
+
+// create buttons
+
 var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
               {id:ENUM.BFV,name:"undefined BFV"},   // BFV
               {id:ENUM.irreg,name: false},
@@ -168,62 +171,51 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
       bePresForm = ENUM.is;
       bePastForm = ENUM.was;
       haveForm = ENUM.has;
-      console.log("Is singular!!!!!" + sentence.subjNum);
       break;
 
     case ENUM.pl:
-      console.log("Is plural!");
   }
-
-  console.log(doForm);
-
-
-
 
 
 var simplePresNeg = [ENUM.subj, doForm, ENUM.not, ENUM.BFV];
 var simplePresQ = [doForm, ENUM.subj, ENUM.BFV];
-
-
-
 var simplePresAffirm;
-
 if (doForm === ENUM.does) {
     simplePresAffirm = [ENUM.subj, ENUM.BFV, ENUM.s];
 } else {
     simplePresAffirm = [ENUM.subj, ENUM.BFV ];
 }
 
+var simplePastAffirm;
+if (sentence.isIrreg) {
+  simplePastAffirm = [ENUM.subj, ENUM.irreg];
+} else {
+  simplePastAffirm = [ENUM.subj, ENUM.BFV, ENUM.ed];
+}
+var simplePastNeg = [ENUM.subj, ENUM.did, ENUM.not, ENUM.BFV];
+var simplePastQ = [ENUM.did, ENUM.subj, ENUM.BFV]
+
+var presProgAffirm = [ENUM.subj, bePresForm, ENUM.BFV, ENUM.ing];
+var presProgNeg = [ENUM.subj, bePresForm, ENUM.not, ENUM.BFV, ENUM.ing];
+var presProgQ = [bePresForm, ENUM.subj, ENUM.BFV, ENUM.ing];
 
 
-
-
-
-
+var currentForm = presProgQ;
 // runs when button is pressed
 var main = function (event){
 var answer = document.getElementById("answer").value;
 
-//var toFind = 202;
-//console.log(buttons.find(function(element){return element.id == toFind;}));
-
 // create sentence info
-
-
-
-
-
-
-
 var arr = answer.split(" ");
-if (simplePresNeg[counter] == arr) {
+console.log(arr, currentForm);
+if (currentForm[counter] == arr) {
   console.log("treffer!");
   counter++;
   console.log("Dispalying:");
   console.log(buttons.find(function(element){return element.id == arr;})['name']);
   document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
   document.getElementById('result').innerText += "-";
-    if (counter == simplePresNeg.length) {
+    if (counter == currentForm.length) {
       console.log("you win!!");
     }
   } else {
