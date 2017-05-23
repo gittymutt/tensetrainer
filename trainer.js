@@ -6,6 +6,9 @@ make getsentence()
 change buttons objects to simple keys
 
 */
+
+var win = false;
+
 var ENUM = {};
 Object.defineProperties(ENUM, {
   'subj': {
@@ -106,7 +109,6 @@ var sentence = {Subj: "Doogie and Froogie",
 // Put words onto screen
 document.getElementById("words").innerText = sentence['Subj'] + "/" + sentence['BFV'] + "/" +
                               sentence['theRest'];
-var counter = 0;
 
 
 // create buttons
@@ -200,7 +202,11 @@ var presProgNeg = [ENUM.subj, bePresForm, ENUM.not, ENUM.BFV, ENUM.ing];
 var presProgQ = [bePresForm, ENUM.subj, ENUM.BFV, ENUM.ing];
 
 
-var currentForm = presProgQ;
+var wCounter = 0;
+var fCounter = 0;
+
+
+var currentForm = [simplePastAffirm, simplePastNeg];
 // runs when button is pressed
 var main = function (event){
 var answer = document.getElementById("answer").value;
@@ -208,15 +214,20 @@ var answer = document.getElementById("answer").value;
 // create sentence info
 var arr = answer.split(" ");
 console.log(arr, currentForm);
-if (currentForm[counter] == arr) {
+if (currentForm[fCounter][wCounter] == arr) {
   console.log("treffer!");
-  counter++;
-  console.log("Dispalying:");
+  wCounter++;
   console.log(buttons.find(function(element){return element.id == arr;})['name']);
   document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
   document.getElementById('result').innerText += "-";
-    if (counter == currentForm.length) {
-      console.log("you win!!");
+    if (wCounter == currentForm[fCounter].length) {
+      console.log("you win that form!!");
+      win = true;
+      wCounter = 0;
+      fCounter++;
+      if (fCounter == currentForm.length) {console.log("You won the whole Internet");}
+      document.getElementById('result').innerText = "";
+
     }
   } else {
   console.log("Falsch!!!");
