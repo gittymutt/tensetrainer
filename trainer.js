@@ -152,6 +152,17 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
                 keypad.innerText += item['id'] + "#";
                 keypad.innerText += item['name'];
                 keypad.innerText += "\n";
+
+                var btn = document.createElement("Button");
+                btn.innerHTML = item['name'];
+                btn.onclick = function () {
+                  var id, name;
+                  word = item['name'];
+                  id = item['id'];
+                  buttonPress(id);
+                  console.log(word);
+                }
+                document.body.appendChild(btn);
               });
 
 
@@ -201,12 +212,15 @@ var presProgAffirm = [ENUM.subj, bePresForm, ENUM.BFV, ENUM.ing];
 var presProgNeg = [ENUM.subj, bePresForm, ENUM.not, ENUM.BFV, ENUM.ing];
 var presProgQ = [bePresForm, ENUM.subj, ENUM.BFV, ENUM.ing];
 
-
 var wCounter = 0;
 var fCounter = 0;
 
-
 var currentForm = [simplePastAffirm, simplePastNeg];
+
+
+
+
+
 // runs when button is pressed
 var main = function (event){
 var answer = document.getElementById("answer").value;
@@ -235,4 +249,30 @@ if (currentForm[fCounter][wCounter] == arr) {
 
 }
 
-console.log(document.getElementById('butt').addEventListener("click", main));
+
+function buttonPress(arr){
+//var answer = document.getElementById("answer").value;
+
+// create sentence info
+//var arr = answer.split(" ");
+console.log(arr, currentForm);
+if (currentForm[fCounter][wCounter] == arr) {
+  console.log("treffer!");
+  wCounter++;
+  console.log(buttons.find(function(element){return element.id == arr;})['name']);
+  document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
+  document.getElementById('result').innerText += "-";
+    if (wCounter == currentForm[fCounter].length) {
+      console.log("you win that form!!");
+      win = true;
+      wCounter = 0;
+      fCounter++;
+      if (fCounter == currentForm.length) {console.log("You won the whole Internet");}
+      document.getElementById('result').innerText = "";
+
+    }
+  } else {
+  console.log("Falsch!!!");
+   }
+
+}
