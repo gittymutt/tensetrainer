@@ -4,7 +4,7 @@
 TO Do:
 make getsentence()
 change buttons objects to simple keys
-
+capitalize first word
 */
 
 var win = false;
@@ -95,8 +95,8 @@ Object.defineProperties(ENUM, {
 
 });
 
-
-var sentence = {Subj: "Obama",
+/*
+var sentence = {Subj: "we",
                 subjNum: ENUM.sing,
                 BFV: "stay",
                 isIrreg: false,
@@ -105,6 +105,17 @@ var sentence = {Subj: "Obama",
                 ingForm: "staying",
                 theRest: "home today."
               };
+*/
+var sentence = {Subj: "we",
+                subjNum: ENUM.pl,
+                BFV: "study",
+                isIrreg: false,
+                isAction: true,
+                SPast: "studied",
+                ingForm: "studying",
+                theRest: "English."
+              };
+
 
 // Put words onto screen
 document.getElementById("words").innerText = sentence['Subj'] + "/" + sentence['BFV'] + "/" +
@@ -149,9 +160,7 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
 
               buttons.forEach(function (item){
 
-                //keypad.innerText += item['id'] + "#";
-                //keypad.innerText += item['name'];
-                //keypad.innerText += "\n";
+              
                 if (item['name']) {
                 var btn = document.createElement("Button");
                 btn.innerHTML = item['name'];
@@ -224,35 +233,6 @@ var currentForm = [
 
 
 document.getElementById('therest').innerText = sentence.theRest;
-
-
-// runs when button is pressed
-var main = function (event){
-var answer = document.getElementById("answer").value;
-
-// create sentence info
-var arr = answer.split(" ");
-console.log(arr, currentForm);
-if (currentForm[fCounter][wCounter] == arr) {
-  wCounter++;
-  console.log(buttons.find(function(element){return element.id == arr;})['name']);
-  document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
-  document.getElementById('result').innerText += "-";
-    if (wCounter == currentForm[fCounter].length) {
-      console.log("you win that form!!");
-      win = true;
-      wCounter = 0;
-      fCounter++;
-      if (fCounter == currentForm.length) {console.log("You won the whole Internet");}
-      document.getElementById('result').innerText = "";
-
-    }
-  } else {
-  console.log("Falsch!!!");
-   }
-
-}
-
 
 function buttonPress(arr){
 //var answer = document.getElementById("answer").value;
