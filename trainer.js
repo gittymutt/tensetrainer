@@ -105,7 +105,7 @@ var sentence = {Subj: "we",
                 ingForm: "staying",
                 theRest: "home today."
               };
-*/
+
 var sentence = {Subj: "we",
                 subjNum: ENUM.pl,
                 BFV: "study",
@@ -115,6 +115,17 @@ var sentence = {Subj: "we",
                 ingForm: "studying",
                 theRest: "English."
               };
+
+  */
+var sentence = {Subj: "it",
+                            subjNum: ENUM.sing,
+                            BFV: "rain",
+                            isIrreg: false,
+                            isAction: true,
+                            SPast: "studied",
+                            ingForm: "studying",
+                            theRest: "cats and dogs."
+                          };
 
 
 // Put words onto screen
@@ -160,7 +171,7 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
 
               buttons.forEach(function (item){
 
-              
+
                 if (item['name']) {
                 var btn = document.createElement("Button");
                 btn.innerHTML = item['name'];
@@ -201,14 +212,16 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
 
 
 var simplePresNeg = [ENUM.subj, doForm, ENUM.not, ENUM.BFV];
+simplePresNeg.name = "Simple present, negative";
 var simplePresQ = [doForm, ENUM.subj, ENUM.BFV];
+simplePresQ.name = "Simple present, yes/no question";
 var simplePresAffirm;
 if (doForm === ENUM.does) {
     simplePresAffirm = [ENUM.subj, ENUM.BFV, ENUM.s];
 } else {
     simplePresAffirm = [ENUM.subj, ENUM.BFV ];
 }
-
+simplePresAffirm.name = "Simple present, affirmative";
 var simplePastAffirm;
 if (sentence.isIrreg) {
   simplePastAffirm = [ENUM.subj, ENUM.irreg];
@@ -217,11 +230,16 @@ if (sentence.isIrreg) {
 }
 simplePastAffirm.name = "Simple past, affirmative";
 var simplePastNeg = [ENUM.subj, ENUM.did, ENUM.not, ENUM.BFV];
+simplePastNeg.name = "Simple past, negative";
 var simplePastQ = [ENUM.did, ENUM.subj, ENUM.BFV]
+simplePastQ.name = "Simple past, question";
 
 var presProgAffirm = [ENUM.subj, bePresForm, ENUM.BFV, ENUM.ing];
+presProgAffirm.name = "Present progressive, affirmative";
 var presProgNeg = [ENUM.subj, bePresForm, ENUM.not, ENUM.BFV, ENUM.ing];
+presProgNeg.name = "Present progressive, negative";
 var presProgQ = [bePresForm, ENUM.subj, ENUM.BFV, ENUM.ing];
+presProgQ.name = "Present progressive, question";
 
 var wCounter = 0;
 var fCounter = 0;
@@ -246,6 +264,7 @@ if (currentForm[fCounter][wCounter] == arr) {
   console.log(buttons.find(function(element){return element.id == arr;})['name']);
   document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
   document.getElementById('result').innerText += "-";
+  document.getElementById('instructions').innerText = currentForm[fCounter].name;
     if (wCounter == currentForm[fCounter].length) {
       console.log("you win that form!!");
       win = true;
