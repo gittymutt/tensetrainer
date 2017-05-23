@@ -96,14 +96,14 @@ Object.defineProperties(ENUM, {
 });
 
 
-var sentence = {Subj: "Doogie and Froogie",
-                subjNum: ENUM.pl,
-                BFV: "eat",
-                isIrreg: true,
+var sentence = {Subj: "Obama",
+                subjNum: ENUM.sing,
+                BFV: "stay",
+                isIrreg: false,
                 isAction: true,
-                SPast: "ate",
-                ingForm: "eating",
-                theRest: "hasenpfeffer"
+                SPast: "stayed",
+                ingForm: "staying",
+                theRest: "home today."
               };
 
 // Put words onto screen
@@ -144,15 +144,15 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
 
               // create actual buttons
 
-              var keypad = document.getElementById('keypad');
+              //var keypad = document.getElementById('keypad');
 
 
               buttons.forEach(function (item){
 
-                keypad.innerText += item['id'] + "#";
-                keypad.innerText += item['name'];
-                keypad.innerText += "\n";
-
+                //keypad.innerText += item['id'] + "#";
+                //keypad.innerText += item['name'];
+                //keypad.innerText += "\n";
+                if (item['name']) {
                 var btn = document.createElement("Button");
                 btn.innerHTML = item['name'];
                 btn.onclick = function () {
@@ -163,6 +163,7 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
                   console.log(word);
                 }
                 document.body.appendChild(btn);
+              }
               });
 
 
@@ -205,6 +206,7 @@ if (sentence.isIrreg) {
 } else {
   simplePastAffirm = [ENUM.subj, ENUM.BFV, ENUM.ed];
 }
+simplePastAffirm.name = "Simple past, affirmative";
 var simplePastNeg = [ENUM.subj, ENUM.did, ENUM.not, ENUM.BFV];
 var simplePastQ = [ENUM.did, ENUM.subj, ENUM.BFV]
 
@@ -215,10 +217,13 @@ var presProgQ = [bePresForm, ENUM.subj, ENUM.BFV, ENUM.ing];
 var wCounter = 0;
 var fCounter = 0;
 
-var currentForm = [simplePastAffirm, simplePastNeg];
+var currentForm = [
+  simplePresAffirm, simplePresNeg, simplePresQ,
+  presProgAffirm, presProgNeg, presProgQ,
+  simplePastAffirm, simplePastNeg, simplePastQ];
 
 
-
+document.getElementById('therest').innerText = sentence.theRest;
 
 
 // runs when button is pressed
@@ -229,7 +234,6 @@ var answer = document.getElementById("answer").value;
 var arr = answer.split(" ");
 console.log(arr, currentForm);
 if (currentForm[fCounter][wCounter] == arr) {
-  console.log("treffer!");
   wCounter++;
   console.log(buttons.find(function(element){return element.id == arr;})['name']);
   document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
@@ -267,6 +271,7 @@ if (currentForm[fCounter][wCounter] == arr) {
       win = true;
       wCounter = 0;
       fCounter++;
+      console.log("fcounter:" + fCounter);
       if (fCounter == currentForm.length) {console.log("You won the whole Internet");}
       document.getElementById('result').innerText = "";
 
