@@ -267,6 +267,7 @@ if (currentForm[fCounter][wCounter] == arr) {
   document.getElementById('instructions').innerText = currentForm[fCounter].name;
     if (wCounter == currentForm[fCounter].length) {
       console.log("you win that form!!");
+      gotIt(document.getElementById('result').innerText);
       win = true;
       wCounter = 0;
       fCounter++;
@@ -277,6 +278,31 @@ if (currentForm[fCounter][wCounter] == arr) {
     }
   } else {
   console.log("Falsch!!!");
+  document.getElementById('goodjob').style.display = "block";
+  document.getElementById('goodjob').style.backgroundColor = "red";
+  document.getElementById('goodjob').innerHTML = "<h1> Wrong!!!!</h1>";
+  document.getElementById('goodjob').innerHTML += "<p> Try again.</p>";
+  setInterval(function (){
+    document.getElementById('goodjob').style.display = "none";
+    document.getElementById('goodjob').style.backgroundColor = "lightgreen";
+  }, 2000);
    }
 
+}
+
+
+
+
+
+
+
+/////////
+
+function gotIt(mesg) {
+  document.getElementById('goodjob').style.display = "block";
+  document.getElementById('goodjob').innerHTML = "<h1> Good Job!</h1>";
+  document.getElementById('goodjob').innerHTML += "<h2>" + mesg + "</h2>";
+  setInterval(function (){
+    document.getElementById('goodjob').style.display = "none";
+  }, 2000);
 }
