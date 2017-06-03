@@ -117,14 +117,14 @@ var sentence = {Subj: "we",
               };
 
   */
-var sentence = {Subj: "it",
-                            subjNum: ENUM.sing,
-                            BFV: "rain",
+var sentence = {Subj: "Poseurs",
+                            subjNum: ENUM.pl,
+                            BFV: "skate",
                             isIrreg: false,
                             isAction: true,
-                            SPast: "studied",
-                            ingForm: "studying",
-                            theRest: "cats and dogs."
+                            SPast: "skated",
+                            ingForm: "skating",
+                            theRest: "badly."
                           };
 
 
@@ -249,7 +249,7 @@ var currentForm = [
   presProgAffirm, presProgNeg, presProgQ,
   simplePastAffirm, simplePastNeg, simplePastQ];
 
-
+document.getElementById('instructions').innerText = currentForm[fCounter].name;
 document.getElementById('therest').innerText = sentence.theRest;
 
 function buttonPress(arr){
@@ -271,8 +271,15 @@ if (currentForm[fCounter][wCounter] == arr) {
       win = true;
       wCounter = 0;
       fCounter++;
+
       console.log("fcounter:" + fCounter);
-      if (fCounter == currentForm.length) {console.log("You won the whole Internet");}
+      if (fCounter == currentForm.length) {
+        console.log("You won the whole Internet");
+        wCounter = 0;
+        fCounter = 0;
+        console.log(currentForm);
+      }
+      document.getElementById('instructions').innerText = currentForm[fCounter].name;
       document.getElementById('result').innerText = "";
 
     }
