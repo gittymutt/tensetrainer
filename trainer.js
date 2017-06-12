@@ -2,10 +2,14 @@
 
 /*
 TO Do:
-make setup() to change to new sentence 
+make setup() to change to new sentence
 make getsentence()
 change buttons objects to simple keys
 capitalize first word
+change endings to time expressions and correct puctuation
+   for question or statement
+make code more modular
+
 */
 
 var win = false;
