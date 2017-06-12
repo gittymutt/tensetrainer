@@ -2,6 +2,7 @@
 
 /*
 TO Do:
+make setup() to change to new sentence 
 make getsentence()
 change buttons objects to simple keys
 capitalize first word
@@ -117,7 +118,7 @@ var sentence = {Subj: "we",
               };
 
   */
-var sentence = {Subj: "Poseurs",
+var sentenceCollection = [{Subj: "Poseurs",
                             subjNum: ENUM.pl,
                             BFV: "skate",
                             isIrreg: false,
@@ -125,8 +126,17 @@ var sentence = {Subj: "Poseurs",
                             SPast: "skated",
                             ingForm: "skating",
                             theRest: "badly."
-                          };
-
+                          },
+                          {Subj: "we",
+                                          subjNum: ENUM.pl,
+                                          BFV: "study",
+                                          isIrreg: false,
+                                          isAction: true,
+                                          SPast: "studied",
+                                          ingForm: "studying",
+                                          theRest: "English."
+                                        }];
+var sentence = sentenceCollection[0];
 
 // Put words onto screen
 document.getElementById("words").innerText = sentence['Subj'] + "/" + sentence['BFV'] + "/" +
@@ -180,7 +190,6 @@ var buttons = [{id:ENUM.subj, name:"undefined Subj"}, // subj
                   word = item['name'];
                   id = item['id'];
                   buttonPress(id);
-                  console.log(word);
                 }
                 document.body.appendChild(btn);
               }
@@ -241,6 +250,7 @@ presProgNeg.name = "Present progressive, negative";
 var presProgQ = [bePresForm, ENUM.subj, ENUM.BFV, ENUM.ing];
 presProgQ.name = "Present progressive, question";
 
+var sCounter = 0;
 var wCounter = 0;
 var fCounter = 0;
 
@@ -252,14 +262,19 @@ var currentForm = [
 document.getElementById('instructions').innerText = currentForm[fCounter].name;
 document.getElementById('therest').innerText = sentence.theRest;
 
+////////////////////////////////////////////////////////////////////
+//// button function
+////////////////////////////////////////////////////////////////////
+
 function buttonPress(arr){
 //var answer = document.getElementById("answer").value;
 
+      console.log("fcounter:" + fCounter);
+      console.log("wcounter:" + wCounter);
+      console.log("scounter:" + sCounter);
 // create sentence info
 //var arr = answer.split(" ");
-console.log(arr, currentForm);
 if (currentForm[fCounter][wCounter] == arr) {
-  console.log("treffer!");
   wCounter++;
   console.log(buttons.find(function(element){return element.id == arr;})['name']);
   document.getElementById('result').innerText += buttons.find(function(element){return element.id == arr;})['name'];
@@ -272,19 +287,20 @@ if (currentForm[fCounter][wCounter] == arr) {
       wCounter = 0;
       fCounter++;
 
-      console.log("fcounter:" + fCounter);
       if (fCounter == currentForm.length) {
         console.log("You won the whole Internet");
         wCounter = 0;
         fCounter = 0;
-        console.log(currentForm);
+        sCounter++;
+
+        sentence = sentenceCollection[sCounter];
+        console.log("sentece: " + sentence);
       }
       document.getElementById('instructions').innerText = currentForm[fCounter].name;
       document.getElementById('result').innerText = "";
 
     }
   } else {
-  console.log("Falsch!!!");
   document.getElementById('goodjob').style.display = "block";
   document.getElementById('goodjob').style.backgroundColor = "red";
   document.getElementById('goodjob').innerHTML = "<h1> Wrong!!!!</h1>";
